@@ -401,3 +401,5 @@ export default function ManageEventsPage() {
     </PrivateRoute>
   );
 }
+
+// Organizer metrics summary
