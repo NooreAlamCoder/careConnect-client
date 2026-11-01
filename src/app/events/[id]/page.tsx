@@ -255,3 +255,5 @@ export default function EventDetailsPage({ params }: EventDetailsPageProps) {
 
 
 // Event metadata details rendered
+
+// Join event action handler
