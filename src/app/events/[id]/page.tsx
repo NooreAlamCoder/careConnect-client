@@ -253,3 +253,5 @@ export default function EventDetailsPage({ params }: EventDetailsPageProps) {
   );
 }
 
+
+// Event metadata details rendered
