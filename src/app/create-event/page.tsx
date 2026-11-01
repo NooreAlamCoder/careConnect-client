@@ -229,3 +229,5 @@ export default function CreateEventPage() {
     </PrivateRoute>
   );
 }
+
+// Event type select options
