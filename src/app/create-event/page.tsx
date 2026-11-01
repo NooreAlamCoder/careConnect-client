@@ -231,3 +231,5 @@ export default function CreateEventPage() {
 }
 
 // Event type select options
+
+// Strict future date boundary check
