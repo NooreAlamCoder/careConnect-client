@@ -405,3 +405,5 @@ export default function ManageEventsPage() {
 // Organizer metrics summary
 
 // Modal prefill state handler
+
+// Delete confirmation dialog
