@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { Logo } from '@/components/common/Logo';
+import { ThemeToggle } from '@/components/common/ThemeToggle';
 import toast from 'react-hot-toast';
-import { Mail, Lock, LogIn, ArrowRight } from 'lucide-react';
+import { Mail, Lock, ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -46,14 +48,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md bg-surface border border-border rounded-3xl p-8 shadow-xl">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary mb-3">
-            <LogIn className="w-6 h-6" />
-          </div>
-          <h1 className="text-2xl font-bold text-foreground">Welcome Back</h1>
-          <p className="text-sm text-foreground-muted mt-1">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background selection:bg-primary selection:text-white">
+      {/* Top Header with Clickable Logo & Theme Toggle */}
+      <div className="w-full max-w-md flex items-center justify-between mb-3 px-1">
+        <Logo size="md" href="/" />
+        <ThemeToggle />
+      </div>
+
+      {/* Main Login Card */}
+      <div className="w-full max-w-md bg-surface border border-border rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xl">
+        <div className="text-center mb-5">
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground">Welcome Back</h1>
+          <p className="text-xs sm:text-sm text-foreground-muted mt-1">
             Log in to manage and join community development events
           </p>
         </div>
@@ -63,9 +69,9 @@ export default function LoginPage() {
           onClick={handleGoogleLogin}
           disabled={submitting}
           type="button"
-          className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-border bg-surface-secondary hover:bg-surface text-foreground font-medium text-sm transition-all shadow-sm cursor-pointer mb-6"
+          className="w-full flex items-center justify-center gap-2.5 py-2.5 sm:py-3 px-4 rounded-xl border border-border bg-surface-secondary hover:bg-surface text-foreground font-medium text-xs sm:text-sm transition-all shadow-sm cursor-pointer mb-4"
         >
-          <svg className="w-5 h-5" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 24 24">
             <path
               fill="#4285F4"
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -86,46 +92,46 @@ export default function LoginPage() {
           <span>Continue with Google</span>
         </button>
 
-        <div className="relative flex items-center justify-center mb-6">
+        <div className="relative flex items-center justify-center mb-4">
           <div className="border-t border-border w-full" />
-          <span className="bg-surface px-3 text-xs text-foreground-muted uppercase tracking-wider">
+          <span className="bg-surface px-2.5 text-[11px] font-medium text-foreground-muted uppercase tracking-wider">
             Or with email
           </span>
           <div className="border-t border-border w-full" />
         </div>
 
         {/* Email Form */}
-        <form onSubmit={handleEmailLogin} className="space-y-4">
+        <form onSubmit={handleEmailLogin} className="space-y-3.5">
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-foreground-muted mb-1.5">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-foreground-muted mb-1">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="w-5 h-5 text-foreground-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-foreground-muted absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-surface-secondary text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                className="w-full pl-9 pr-3 py-2 sm:py-2.5 rounded-xl border border-border bg-surface-secondary text-foreground text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-foreground-muted mb-1.5">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-foreground-muted mb-1">
               Password
             </label>
             <div className="relative">
-              <Lock className="w-5 h-5 text-foreground-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-foreground-muted absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-surface-secondary text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                className="w-full pl-9 pr-3 py-2 sm:py-2.5 rounded-xl border border-border bg-surface-secondary text-foreground text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
           </div>
@@ -133,14 +139,14 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-medium text-sm transition-all shadow-md shadow-primary/20 cursor-pointer disabled:opacity-50 mt-2"
+            className="w-full flex items-center justify-center gap-2 py-2.5 sm:py-3 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-medium text-xs sm:text-sm transition-all shadow-md shadow-primary/20 cursor-pointer disabled:opacity-50 mt-1"
           >
             <span>{submitting ? 'Logging in...' : 'Sign In'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        <p className="text-center text-sm text-foreground-muted mt-6">
+        <p className="text-center text-xs sm:text-sm text-foreground-muted mt-4">
           Don&apos;t have an account?{' '}
           <Link href="/register" className="text-primary font-semibold hover:underline">
             Register here
@@ -150,4 +156,3 @@ export default function LoginPage() {
     </div>
   );
 }
-

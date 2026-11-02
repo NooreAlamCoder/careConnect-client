@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { AuthProvider } from '@/context/AuthContext';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
+import { AppLayout } from '@/components/layout/AppLayout';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
@@ -39,9 +38,7 @@ export default function RootLayout({
                 },
               }}
             />
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <AppLayout>{children}</AppLayout>
           </AuthProvider>
         </ThemeProvider>
       </body>
