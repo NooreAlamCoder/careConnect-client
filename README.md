@@ -1,9 +1,6 @@
 # 🤝 CareConnect - Social Development Events Platform
 
-> **Live Website:** [https://care-connect-client-one.vercel.app](https://care-connect-client-one.vercel.app)  
-> **Backend API (Live):** [https://care-connect-server-smoky.vercel.app](https://care-connect-server-smoky.vercel.app)  
-> **Client Repository:** [https://github.com/NooreAlamCoder/careConnect-client](https://github.com/NooreAlamCoder/careConnect-client)  
-> **Server Repository:** [https://github.com/NooreAlamCoder/careConnect-server](https://github.com/NooreAlamCoder/careConnect-server)
+> **Live Website:** [https://care-connect-client-one.vercel.app](https://care-connect-client-one.vercel.app)
 
 **CareConnect** is a modern, community-driven social development event management platform where citizens, activists, and volunteers can organize, discover, and participate in local social service initiatives (e.g. Winter Clothes Distribution, Tree Plantation, Cleanliness Drives, Educational Book Drives, Community Healthcare Camps).
 
