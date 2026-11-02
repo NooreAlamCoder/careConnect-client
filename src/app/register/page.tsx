@@ -222,19 +222,6 @@ export default function RegisterPage() {
             <span>{submitting ? 'Creating Account...' : 'Register'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-
-          {/* Terms & Privacy Notice */}
-          <p className="text-center text-[11px] text-foreground-muted leading-relaxed px-2 pt-1">
-            By registering, you agree to our{' '}
-            <Link href="#" className="underline font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
-              Terms of Service
-            </Link>{' '}
-            and{' '}
-            <Link href="#" className="underline font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
-              Privacy Policy
-            </Link>
-            .
-          </p>
         </form>
 
         <p className="text-center text-xs sm:text-sm text-foreground-muted mt-4">
