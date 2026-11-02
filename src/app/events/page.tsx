@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { IEvent, EventType } from '@/types';
 import { fetchUpcomingEvents } from '@/lib/api';
 import { EventCard } from '@/components/events/EventCard';
@@ -17,11 +18,27 @@ const CATEGORIES: ('All' | EventType)[] = [
   'Other',
 ];
 
-export default function UpcomingEventsPage() {
+function UpcomingEventsContent() {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get('category');
+  const validInitial = initialCategory && CATEGORIES.includes(initialCategory as EventType)
+    ? initialCategory
+    : 'All';
+
   const [events, setEvents] = useState<IEvent[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [category, setCategory] = useState<string>('All');
+  const [category, setCategory] = useState<string>(validInitial);
   const [search, setSearch] = useState<string>('');
+
+  // Sync category state when URL query parameter changes
+  useEffect(() => {
+    const urlCat = searchParams.get('category');
+    if (urlCat && CATEGORIES.includes(urlCat as EventType)) {
+      setCategory(urlCat);
+    } else if (!urlCat) {
+      setCategory('All');
+    }
+  }, [searchParams]);
 
   const loadEvents = async () => {
     try {
@@ -129,3 +146,18 @@ export default function UpcomingEventsPage() {
   );
 }
 
+export default function UpcomingEventsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-12 bg-background min-h-screen">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <EventGridSkeleton count={6} />
+          </div>
+        </div>
+      }
+    >
+      <UpcomingEventsContent />
+    </Suspense>
+  );
+}

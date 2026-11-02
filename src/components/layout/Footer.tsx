@@ -14,9 +14,9 @@ export const Footer: React.FC = () => {
             <p className="text-sm text-foreground-muted leading-relaxed">
               Empowering local communities to organize, join, and support impactful social development initiatives across the country.
             </p>
-            {/* Social Icons including the new X logo */}
+            {/* Social Icons */}
             <div className="flex items-center gap-3 pt-2">
-              {/* New X Logo (rebranded Twitter) */}
+              {/* X Logo */}
               <a
                 href="https://x.com"
                 target="_blank"
@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
               Quick Links
             </h3>
-            <ul className="space-y-2 text-sm text-foreground-muted">
+            <ul className="space-y-2.5 text-sm text-foreground-muted">
               <li>
                 <Link href="/" className="hover:text-primary transition-colors">
                   Home
@@ -83,6 +83,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/manage-events" className="hover:text-primary transition-colors">
+                  Manage Events
+                </Link>
+              </li>
+              <li>
                 <Link href="/joined-events" className="hover:text-primary transition-colors">
                   Joined Events
                 </Link>
@@ -90,31 +95,51 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Event Categories */}
+          {/* Event Categories with Direct Filters */}
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Service Sectors
+              Popular Categories
             </h3>
-            <ul className="space-y-2 text-sm text-foreground-muted">
+            <ul className="space-y-2.5 text-sm text-foreground-muted">
               <li>
-                <span className="hover:text-primary transition-colors cursor-pointer">
-                  Winter Clothing Distribution
-                </span>
+                <Link
+                  href="/events?category=Donation"
+                  className="hover:text-primary transition-colors flex items-center gap-1.5"
+                >
+                  <span>Donation & Relief</span>
+                </Link>
               </li>
               <li>
-                <span className="hover:text-primary transition-colors cursor-pointer">
-                  Tree Plantation Drives
-                </span>
+                <Link
+                  href="/events?category=Plantation"
+                  className="hover:text-primary transition-colors flex items-center gap-1.5"
+                >
+                  <span>Tree Plantation Drives</span>
+                </Link>
               </li>
               <li>
-                <span className="hover:text-primary transition-colors cursor-pointer">
-                  Neighborhood Cleanups
-                </span>
+                <Link
+                  href="/events?category=Cleanup"
+                  className="hover:text-primary transition-colors flex items-center gap-1.5"
+                >
+                  <span>Community Cleanups</span>
+                </Link>
               </li>
               <li>
-                <span className="hover:text-primary transition-colors cursor-pointer">
-                  Free Medical Camps
-                </span>
+                <Link
+                  href="/events?category=Healthcare"
+                  className="hover:text-primary transition-colors flex items-center gap-1.5"
+                >
+                  <span>Healthcare & Medical</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/events?category=Education"
+                  className="hover:text-primary transition-colors flex items-center gap-1.5"
+                >
+                  <span>Education & Books</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -131,28 +156,48 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
-                <span>noorealom1997@gmail.com</span>
+                <a
+                  href="mailto:noorealom1997@gmail.com"
+                  className="hover:text-primary transition-colors"
+                >
+                  noorealom1997@gmail.com
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-primary shrink-0" />
-                <span>+880 1780-743453</span>
+                <a
+                  href="tel:+8801780743453"
+                  className="hover:text-primary transition-colors"
+                >
+                  +880 1780-743453
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
+        {/* Footer Bottom Bar with Active Legal Links */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between text-xs text-foreground-muted gap-4">
           <p>© 2026 CareConnect Platform. All rights reserved.</p>
-          <div className="flex gap-6">
-            <span className="hover:text-primary cursor-pointer transition-colors">
+          <div className="flex flex-wrap items-center gap-6">
+            <Link
+              href="/privacy"
+              className="hover:text-primary transition-colors cursor-pointer"
+            >
               Privacy Policy
-            </span>
-            <span className="hover:text-primary cursor-pointer transition-colors">
+            </Link>
+            <Link
+              href="/terms"
+              className="hover:text-primary transition-colors cursor-pointer"
+            >
               Terms of Service
-            </span>
-            <span className="hover:text-primary cursor-pointer transition-colors">
-              Volunteer Code of Conduct
-            </span>
+            </Link>
+            <Link
+              href="/terms#volunteer-conduct"
+              className="hover:text-primary transition-colors cursor-pointer"
+            >
+              Volunteer Guidelines
+            </Link>
           </div>
         </div>
       </div>
