@@ -13,10 +13,10 @@ const getAuthHeaders = (): HeadersInit => {
   return headers;
 };
 
-// 1. Fetch 6 Recent Events for Home Page
+// 1. Fetch 6 Recent Events for Home Page (ISR cached for fast edge delivery)
 export const fetchRecentEvents = async (): Promise<IEvent[]> => {
   const res = await fetch(`${API_BASE_URL}/events/recent`, {
-    cache: 'no-store',
+    next: { revalidate: 60 },
   });
   if (!res.ok) {
     throw new Error('Failed to fetch recent events');
@@ -35,7 +35,9 @@ export const fetchUpcomingEvents = async (
   if (search && search.trim() !== '') params.append('search', search.trim());
 
   const url = `${API_BASE_URL}/events/upcoming${params.toString() ? `?${params.toString()}` : ''}`;
-  const res = await fetch(url, { cache: 'no-store' });
+  const res = await fetch(url, {
+    next: { revalidate: 30 },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch upcoming events');
   }
@@ -45,7 +47,9 @@ export const fetchUpcomingEvents = async (
 
 // 3. Fetch Single Event Details
 export const fetchEventById = async (id: string): Promise<IEvent> => {
-  const res = await fetch(`${API_BASE_URL}/events/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${API_BASE_URL}/events/${id}`, {
+    next: { revalidate: 60 },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch event details');
   }
