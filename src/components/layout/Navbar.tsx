@@ -56,10 +56,10 @@ export const Navbar: React.FC = () => {
 
   const getMobileLinkClass = (path: string): string => {
     const active = isActive(path);
-    return `group flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
+    return `group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer ${
       active
-        ? 'bg-primary/10 text-primary font-semibold border-l-4 border-primary pl-3 shadow-xs'
-        : 'text-foreground hover:bg-surface-secondary hover:text-primary hover:translate-x-1'
+        ? 'bg-primary/15 text-primary font-semibold shadow-xs'
+        : 'text-foreground hover:bg-surface-secondary/80 hover:text-primary hover:translate-x-0.5'
     }`;
   };
 
@@ -199,166 +199,164 @@ export const Navbar: React.FC = () => {
               <ThemeToggle />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                className={`p-2 rounded-xl transition-all cursor-pointer ${
                   mobileMenuOpen
-                    ? 'bg-primary/10 text-primary'
+                    ? 'bg-primary text-white shadow-sm'
                     : 'text-foreground hover:bg-surface-secondary'
                 }`}
                 aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                 aria-expanded={mobileMenuOpen}
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile Backdrop Overlay (Fixed Blur & Dimming - Closes on click) */}
+      {/* Mobile Backdrop Overlay (Smooth Full Screen Blur & Dimming) */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 top-16 bg-black/60 backdrop-blur-md z-40 md:hidden animate-in fade-in duration-200 cursor-pointer"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden animate-in fade-in duration-200 cursor-pointer"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
       )}
 
-      {/* Mobile Floating Overlay Menu (Overlaps page content, 0 layout shift) */}
+      {/* Mobile Floating Card Menu (Right-aligned, NOT full width, Floating Island) */}
       {mobileMenuOpen && (
         <div
-          className="fixed top-16 inset-x-0 bg-surface/95 backdrop-blur-2xl border-b border-border shadow-2xl z-50 md:hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto animate-in fade-in slide-in-from-top-3 duration-200"
+          className="fixed top-[68px] right-3 w-[300px] max-w-[calc(100vw-1.5rem)] bg-surface/98 backdrop-blur-2xl border border-border/80 rounded-2xl shadow-2xl z-50 md:hidden max-h-[calc(100vh-5.5rem)] overflow-y-auto animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-150 origin-top-right p-3.5 space-y-3"
         >
-          <div className="max-w-7xl mx-auto px-4 py-5 space-y-4">
-            {/* User Profile Card (if authenticated) */}
-            {user && (
-              <div className="flex items-center gap-3.5 p-3.5 bg-surface-secondary/80 border border-border/80 rounded-2xl shadow-xs">
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName}
-                  className="w-11 h-11 rounded-full object-cover border-2 border-primary/40 p-0.5 shrink-0 bg-surface"
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-bold text-foreground truncate">
-                      {user.displayName}
-                    </p>
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/15 text-primary shrink-0">
-                      Volunteer
-                    </span>
-                  </div>
-                  <p className="text-xs text-foreground-muted truncate mt-0.5">
-                    {user.email}
+          {/* User Profile Card (if authenticated) */}
+          {user && (
+            <div className="flex items-center gap-3 p-2.5 bg-surface-secondary/70 border border-border/60 rounded-xl">
+              <img
+                src={user.photoURL}
+                alt={user.displayName}
+                className="w-10 h-10 rounded-full object-cover border border-primary/30 p-0.5 shrink-0 bg-surface"
+              />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <p className="text-sm font-bold text-foreground truncate">
+                    {user.displayName}
                   </p>
+                  <span className="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-semibold bg-primary/15 text-primary shrink-0">
+                    Volunteer
+                  </span>
                 </div>
+                <p className="text-xs text-foreground-muted truncate mt-0.5">
+                  {user.email}
+                </p>
               </div>
-            )}
-
-            {/* Navigation Links with Hover & Active Highlight States */}
-            <div className="space-y-1">
-              <Link
-                href="/events"
-                onClick={() => setMobileMenuOpen(false)}
-                className={getMobileLinkClass('/events')}
-              >
-                <div className="flex items-center gap-3">
-                  <Calendar className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-                  <span>Upcoming Events</span>
-                </div>
-                <ChevronRight
-                  className={`w-4 h-4 transition-transform ${
-                    isActive('/events')
-                      ? 'text-primary'
-                      : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
-                  }`}
-                />
-              </Link>
-
-              {user ? (
-                <>
-                  <Link
-                    href="/create-event"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={getMobileLinkClass('/create-event')}
-                  >
-                    <div className="flex items-center gap-3">
-                      <PlusCircle className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-                      <span>Create Event</span>
-                    </div>
-                    <ChevronRight
-                      className={`w-4 h-4 transition-transform ${
-                        isActive('/create-event')
-                          ? 'text-primary'
-                          : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
-                      }`}
-                    />
-                  </Link>
-
-                  <Link
-                    href="/manage-events"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={getMobileLinkClass('/manage-events')}
-                  >
-                    <div className="flex items-center gap-3">
-                      <FolderKanban className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-                      <span>Manage Events</span>
-                    </div>
-                    <ChevronRight
-                      className={`w-4 h-4 transition-transform ${
-                        isActive('/manage-events')
-                          ? 'text-primary'
-                          : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
-                      }`}
-                    />
-                  </Link>
-
-                  <Link
-                    href="/joined-events"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={getMobileLinkClass('/joined-events')}
-                  >
-                    <div className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-                      <span>Joined Events</span>
-                    </div>
-                    <ChevronRight
-                      className={`w-4 h-4 transition-transform ${
-                        isActive('/joined-events')
-                          ? 'text-primary'
-                          : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
-                      }`}
-                    />
-                  </Link>
-                </>
-              ) : null}
             </div>
+          )}
 
-            {/* Bottom Actions: Logout or Login */}
-            <div className="pt-2 border-t border-border">
-              {user ? (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    logout();
-                  }}
-                  className="group flex items-center justify-between w-full px-3.5 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-500/10 hover:translate-x-1 transition-all duration-200 cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <LogOut className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>Logout</span>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-red-500/40 group-hover:text-red-500 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              ) : (
+          {/* Navigation Links with Hover & Active Highlight States */}
+          <div className="space-y-1">
+            <Link
+              href="/events"
+              onClick={() => setMobileMenuOpen(false)}
+              className={getMobileLinkClass('/events')}
+            >
+              <div className="flex items-center gap-2.5">
+                <Calendar className="w-4 h-4 text-primary shrink-0" />
+                <span>Upcoming Events</span>
+              </div>
+              <ChevronRight
+                className={`w-4 h-4 transition-transform ${
+                  isActive('/events')
+                    ? 'text-primary'
+                    : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
+                }`}
+              />
+            </Link>
+
+            {user ? (
+              <>
                 <Link
-                  href="/login"
+                  href="/create-event"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-primary hover:bg-primary-hover text-white text-sm font-semibold shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                  className={getMobileLinkClass('/create-event')}
                 >
-                  <LogIn className="w-4 h-4" />
-                  <span>Login / Register</span>
+                  <div className="flex items-center gap-2.5">
+                    <PlusCircle className="w-4 h-4 text-primary shrink-0" />
+                    <span>Create Event</span>
+                  </div>
+                  <ChevronRight
+                    className={`w-4 h-4 transition-transform ${
+                      isActive('/create-event')
+                        ? 'text-primary'
+                        : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
+                    }`}
+                  />
                 </Link>
-              )}
-            </div>
+
+                <Link
+                  href="/manage-events"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={getMobileLinkClass('/manage-events')}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <FolderKanban className="w-4 h-4 text-primary shrink-0" />
+                    <span>Manage Events</span>
+                  </div>
+                  <ChevronRight
+                    className={`w-4 h-4 transition-transform ${
+                      isActive('/manage-events')
+                        ? 'text-primary'
+                        : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
+                    }`}
+                  />
+                </Link>
+
+                <Link
+                  href="/joined-events"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={getMobileLinkClass('/joined-events')}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    <span>Joined Events</span>
+                  </div>
+                  <ChevronRight
+                    className={`w-4 h-4 transition-transform ${
+                      isActive('/joined-events')
+                        ? 'text-primary'
+                        : 'text-foreground-muted/40 group-hover:text-primary group-hover:translate-x-0.5'
+                    }`}
+                  />
+                </Link>
+              </>
+            ) : null}
+          </div>
+
+          {/* Bottom Actions: Logout or Login */}
+          <div className="pt-2 border-t border-border/80">
+            {user ? (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  logout();
+                }}
+                className="group flex items-center justify-between w-full px-3 py-2 rounded-xl text-sm font-medium text-red-500 hover:bg-red-500/10 transition-all duration-150 cursor-pointer"
+              >
+                <div className="flex items-center gap-2.5">
+                  <LogOut className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  <span>Logout</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-red-500/40 group-hover:text-red-500 group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-white text-sm font-semibold shadow-md transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <LogIn className="w-4 h-4" />
+                <span>Login / Register</span>
+              </Link>
+            )}
           </div>
         </div>
       )}
