@@ -129,7 +129,3 @@ export default function UpcomingEventsPage() {
   );
 }
 
-
-// Category filter active state
-
-// Search debounce query applied

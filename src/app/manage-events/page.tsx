@@ -401,11 +401,3 @@ export default function ManageEventsPage() {
     </PrivateRoute>
   );
 }
-
-// Organizer metrics summary
-
-// Modal prefill state handler
-
-// Delete confirmation dialog
-
-// Edit modal ImageUploadInput

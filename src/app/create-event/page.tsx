@@ -229,9 +229,3 @@ export default function CreateEventPage() {
     </PrivateRoute>
   );
 }
-
-// Event type select options
-
-// Strict future date boundary check
-
-// ImageUploadInput integration

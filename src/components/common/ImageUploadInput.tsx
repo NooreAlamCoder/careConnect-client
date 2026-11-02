@@ -280,7 +280,3 @@ export const ImageUploadInput: React.FC<ImageUploadInputProps> = ({
   );
 };
 
-
-// Drag and drop file listeners
-
-// Fallback URL preview card
